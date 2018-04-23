@@ -1,0 +1,380 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Amaze UI Admin user Examples</title>
+  <meta name="description" content="这是一个 user 页面">
+  <meta name="keywords" content="user">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+  <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+
+<header class="am-topbar am-topbar-inverse admin-header">
+  <div class="am-topbar-brand">
+    <strong>Amaze UI</strong> <small>后台管理模板</small>
+  </div>
+
+  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+  <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+    <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+      <li><a href="javascript:;"><span class="am-icon-envelope-o"></span> 收件箱 <span class="am-badge am-badge-warning">5</span></a></li>
+      <li class="am-dropdown" data-am-dropdown>
+        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+          <span class="am-icon-users"></span> 管理员 <span class="am-icon-caret-down"></span>
+        </a>
+        <ul class="am-dropdown-content">
+          <li><a href="#"><span class="am-icon-user"></span> 资料</a></li>
+          <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
+          <li><a href="#"><span class="am-icon-power-off"></span> 退出</a></li>
+        </ul>
+      </li>
+      <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="am-cf admin-main">
+    <!-- sidebar start -->
+   <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+    <div class="am-offcanvas-bar admin-offcanvas-bar">
+      <ul class="am-list admin-sidebar-list">
+        <li>
+          <a href="/user/info">
+            <span class="am-icon-home"></span> 首页</a>
+        </li>
+        
+        <li class="admin-parent">
+          <a class="am-cf" data-am-collapse="{target: '#collapse-nodemanage'}">
+            <span class="am-icon-file"></span> 节点管理
+            <span class="am-icon-angle-right am-fr am-margin-right"></span>
+          </a>
+          <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-nodemanage">
+            <li>
+              <a href="/user/node/list">
+                <span class="am-icon-pencil-square-o"></span> node</a>
+            </li>
+          </ul>
+        </li>
+        <li class="admin-parent">
+          <a class="am-cf" data-am-collapse="{target: '#collapse-appmanage'}">
+            <span class="am-icon-file"></span> 应用管理
+            <span class="am-icon-angle-right am-fr am-margin-right"></span>
+          </a>
+          <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-appmanage">
+            <li>
+              <a href="/user/pod/list">
+                <span class="am-icon-table"></span> pod</a>
+            </li>
+            <li>
+              <a href="/user/replicationcontroller/list">
+                <span class="am-icon-pencil-square-o"></span> replicationcontroler</a>
+            </li>
+            <li>
+              <a href="/user/service/list">
+                <span class="am-icon-pencil-square-o"></span> service</a>
+            </li>
+          </ul>
+        </li>
+        <li class="admin-parent">
+          <a class="am-cf" data-am-collapse="{target: '#collapse-storagemanage'}">
+            <span class="am-icon-file"></span> 存储管理
+            <span class="am-icon-angle-right am-fr am-margin-right"></span>
+          </a>
+          <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-storagemanage">
+            <li>
+              <a href="/user/pvc/list">
+                <span class="am-icon-pencil-square-o"></span> pvc</a>
+            </li>
+          </ul>
+        </li>
+        <li class="admin-parent">
+          <a class="am-cf" data-am-collapse="{target: '#collapse-imagemanage'}">
+            <span class="am-icon-file"></span> 镜像管理
+            <span class="am-icon-angle-right am-fr am-margin-right"></span>
+          </a>
+          <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-imagemanage">
+            <li>
+              <a href="/user/image/list">
+                <span class="am-icon-pencil-square-o"></span> image</a>
+            </li>
+          </ul>
+        </li>
+        <li class="admin-parent">
+          <a class="am-cf" data-am-collapse="{target: '#collapse-logsmanage'}">
+            <span class="am-icon-file"></span> 日志管理
+            <span class="am-icon-angle-right am-fr am-margin-right"></span>
+          </a>
+          <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-logsmanage">
+            <li>
+              <a href="/user/log/list">
+                <span class="am-icon-pencil-square-o"></span> logs</a>
+            </li>
+          </ul>
+        </li>         
+        
+        <li>
+          <a href="/user/login">
+            <span class="am-icon-sign-out"></span> 注销</a>
+        </li>
+      </ul>
+
+      <div class="am-panel am-panel-default admin-sidebar-panel">
+        <div class="am-panel-bd">
+          <p>
+            <span class="am-icon-tag"></span> Message</p>
+          <p>Welcome to myproject!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="admin-content-body">
+      <div class="am-cf am-padding am-padding-bottom-0">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">replicationcontroller</strong> / <small>create information</small></div>
+      </div>
+
+      <hr/>
+
+      <div id="myDiv">
+
+      </div>
+
+      <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+          
+        </div>
+
+        <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+          <form class="am-form am-form-horizontal" >
+            <div class="am-form-group">
+              <label for="user-name" class="am-u-sm-3 am-form-label">Name</label>
+              <div class="am-u-sm-9">
+                <input type="text" id="replicationcontroller_name" placeholder="redis-master">
+                <small>输入副本控制器的名字</small>
+              </div>
+            </div>
+
+            <div class="am-form-group">
+              <label for="user-name" class="am-u-sm-3 am-form-label">Replicates</label>
+              <div class="am-u-sm-9">
+                <input type="number" id="replicates" placeholder="1">
+                <small>输出创建副本控制器pod的副本数</small>
+              </div>
+            </div>
+
+            <div class="am-form-group">
+              <label for="user-name" class="am-u-sm-3 am-form-label">ContainerName</label>
+              <div class="am-u-sm-9">
+                <input type="text" id="container_name" placeholder="master">
+                <small>输入容器名字</small>
+              </div>
+            </div>
+
+            <div class="am-form-group">
+                <label for="user-name" class="am-u-sm-3 am-form-label">ContainerImage</label>
+                <div class="am-u-sm-9">
+                  <select  id="image_name"  >
+                      <option value ="image_name">ImageName</option>
+                    </select>
+                  <small>输入镜像源</small>
+                </div>
+              </div>
+
+              <div class="am-form-group">
+                <label for="user-name" class="am-u-sm-3 am-form-label">ContainerEnv</label>
+                <div class="am-u-sm-9">
+                  <div id="ENVS">                                       
+                  </div>
+                  <span onclick="AddENV()">+</span>
+                  <span onclick="DelENV()">-</span>
+                  <small>输入环境变量</small>
+                </div>
+              </div>
+
+              <div class="am-form-group">
+                  <label for="user-name" class="am-u-sm-3 am-form-label">ContainerPort</label>
+                  <div class="am-u-sm-9">
+                    <input type="number" id="container_port" placeholder="6379">
+                    <small>输入容器映射端口</small>
+                  </div>
+                </div>
+
+                <div class="am-form-group">
+                  <label for="user-name" class="am-u-sm-3 am-form-label">ContainerCommand</label>
+                  <div class="am-u-sm-9">
+                    <input type="text" id="container_command" placeholder="可以不需要应用启动命令">
+                    <small>输入应用启动命令</small>
+                  </div>
+                </div>
+
+            <div class="am-form-group">
+              <div class="am-u-sm-9 am-u-sm-push-3">
+                <button onclick="createRC()" class="am-btn am-btn-primary">submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <footer class="admin-content-footer">
+      <hr>
+      <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+    </footer>
+
+  </div>
+  <!-- content end -->
+
+</div>
+
+<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+<footer>
+  <hr>
+  <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+</footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="assets/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="assets/js/amazeui.min.js"></script>
+
+<script src="assets/js/app.js"></script>
+<script>
+  var globalarray = new Array()
+  var globalKV ='<input type="text" name="ENV_key" placeholder="key" ><input type="text" name="ENV_value" placeholder="value" >'
+  function AddENV(){
+    
+    var htmltext;
+    globalarray.push(globalKV);
+    for (var j=0;j<globalarray.length;j++){
+      htmltext+=globalarray[j];
+    }   
+    
+    document.getElementById("ENVS").innerHTML=htmltext;
+    
+  }
+
+  function DelENV(){
+    
+    var htmltext;
+    globalarray.pop(globalKV);
+    for (var j=0;j<globalarray.length;j++){
+      htmltext+=globalarray[j];
+    }   
+    
+    document.getElementById("ENVS").innerHTML=htmltext;
+    
+  }
+
+  function LoadImageSelect(){
+    var xmlhttp;
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp = new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        var obj=JSON.parse(xmlhttp.responseText);
+        var htmltext='';
+        for (var i=0;i<obj.length;i=i+1){
+          htmltext+='<option value=192.168.34.158:5000/'+obj[i]["name"]+':'+obj[i]["tag"]+'>'+ 
+          obj[i]["name"]+':'+obj[i]["tag"]+'</option>';
+        }
+        document.getElementById("image_name").innerHTML=htmltext;
+
+      }
+    }
+    xmlhttp.open("get", "/image/list/", true);
+    xmlhttp.send();
+  }
+    function createRC(){
+        var replicationcontroller_name=document.getElementById("replicationcontroller_name").value;
+        var replicates =Number(document.getElementById("replicates").value);
+        var container_name=document.getElementById("container_name").value;
+        var image_name=document.getElementById("image_name").value;
+        var container_port=Number(document.getElementById("container_port").value);
+        // var ENV_key=document.getElementById("ENV_key").value;
+        // var ENV_value=document.getElementById("ENV_value").value;
+        
+        
+
+        // var ENV={};
+        // ENV.name=ENV_key;
+        // ENV.value=ENV_value;
+
+        var obj={};
+        var container={};
+        var port=[container_port];
+
+
+        container.containername=container_name;
+        container.containerimage=image_name;
+        container.ports=port;
+
+        var ks=document.getElementsByName("ENV_key");
+        var vs=document.getElementsByName("ENV_value");
+        var envarray=new Array();
+
+        for(var i=0;i<ks.length;i++){
+          var env={};
+          env.name=ks[i].value;
+          env.value=vs[i].value;
+          envarray.push(env)
+        }
+        container.env=envarray;
+
+        obj.name=replicationcontroller_name;
+        obj.replicas=replicates;
+        obj.containers=[container]
+
+        var a=JSON.stringify(obj,undefined,2)
+
+        alert(a);
+
+        $.ajax({
+            url: "/replicationcontroller/create",
+            type: "post",
+            dataType: "json",
+            data: a,
+            headers: { 'Content-Type': 'application/json' },
+            success: function (res) {
+                if (res.status == 1) {
+                    //window.location.reload();
+                    alert(success);
+                } else {
+                    alert(res.message);
+                }
+            }
+        })
+
+
+    }
+    document.body.onload=LoadImageSelect;
+</script>
+</body>
+</html>

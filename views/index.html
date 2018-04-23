@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * {
+      box-sizing: border-box;
+  }
+  table,td,th
+{
+	border:1px solid black;
+}
+table
+{
+	width:100%;
+}
+th
+{
+	height:50px;
+}
+td 
+{ 
+text-align:center; 
+}
+  .row:after {
+      content: "";
+      clear: both;
+      display: block;
+  }
+  [class*="col-"] {
+      float: left;
+      padding: 15px;
+  }
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%;}
+  .col-4 {width: 33.33%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;}
+  html {
+      font-family: "Times New Roman", sans-serif;
+  }
+  .header {
+      background-color: #000000;
+      color: hsl(0, 0%, 99%);
+      padding: 15px;
+  }
+  .menu ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+  }
+  .menu li {
+      padding: 8px;
+      margin-bottom: 7px;
+      background-color :#000000;
+      color: #fffff0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  }
+  .menu li:hover {
+      background-color: #0099cc;
+  }
+  </style>
+<script>
+function loadXMLDoc()
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+      var obj=JSON.parse(xmlhttp.responseText);
+    document.getElementById("myDiv").innerHTML=
+    "<div class='col-6 header'><h2>Details</h2>"+
+    "name:"+obj.items[0].metadata.name+"<br>"+
+    "uid:"+obj.items[0].metadata.uid+"<br>"+
+    "labels:"+obj.items[0].metadata.labels+"<br>"+
+    "externalID:"+obj.items[0].spec.externalID+"<br>"+
+    "</div>";
+    }
+}
+xmlhttp.open("GET","/node/list",true);
+xmlhttp.send();
+}
+//loadPods loadPods
+function loadPods(){
+    var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+      var obj=JSON.parse(xmlhttp.responseText);
+   var htmltext="<div class='col-10 header'><h2>pods</h2>"+
+    // "name:"+obj.items[0].metadata.name+"<br>"+
+    // "uid:"+obj.items[0].metadata.uid+"<br>"+
+    // "labels:"+obj.items[0].metadata.labels+"<br>"+
+    // "externalID:"+obj.items[0].spec.externalID+"<br>"+
+    "<table><tr><th>name</th><th>namespace</th><th>status</th><th>restarts</th><th>create_time</th><th>cluster ip</th><th>operate</th></tr>";
+    var items=obj.items;
+    for (var i=0;i<items.length;i=i+1){
+        htmltext=htmltext+"<tr><td onclick=loadPodDetail('"+items[i].metadata.name+"','"+items[i].metadata.namespace+"')><font color='blue'>"+
+        obj.items[i].metadata.name+
+        "</font></td>"+
+        "<td>"+obj.items[i].metadata.namespace+"</td>"+
+        "<td>"+obj.items[i].status.phase+"</td>"+
+        "<td>"+obj.items[i].status.containerStatuses[0].restartCount+"</td>"+
+        "<td>"+obj.items[i].metadata.creationTimestamp+"</td>"+
+        "<td>"+obj.items[i].status.podIP+"</td>"+
+        "<td onclick=DelPod('"+items[i].metadata.name+"','"+items[i].metadata.namespace+"')><font color='blue'>"+"delete"+
+        "</font></td></tr>";
+    }
+    htmltext=htmltext+"</table></div>";
+    document.getElementById("myDiv").innerHTML=htmltext;
+    }
+}
+xmlhttp.open("GET","/pod/list",true);
+xmlhttp.send();
+}
+//loadPodDetail loadPodDetail
+function loadPodDetail(name,namespace){
+    var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+      var obj=JSON.parse(xmlhttp.responseText);
+     // var htmltext="<div class='col-6 header'><h2>"+name+"</h2>
+      var htmltext= "<div class='col-8 header'><h2>pod</h2>"+
+    "name:"+obj.metadata.name+"<br>"+
+    "namespace:"+obj.metadata.namespace+"<br>"+
+    "starttime"+obj.status.startTime+"<br>"+
+    "labels:";
+    for (var k in obj.metadata.labels){
+      htmltext += k+":"+obj.metadata.labels[k]+"  ";
+    }
+    htmltext +="<br>"+"status:"+obj.status.phase+"<br>"+
+    "</div>";
+
+    htmltext+="<div class='col-4 header'><h2>network</h2>"+
+    "node:"+obj.spec.nodeName+"<br>"+
+    "ip:"+obj.status.podIP+"<br><br><br><br></div>";
+
+    htmltext+="<div class='header'><h2>containers</h2>"+
+    obj.spec.containers[0].name+"<br>"+
+    "image:"+obj.spec.containers[0].image+"<br>"+
+    "Environment variables:"+obj.spec.containers[0].env+"<br>"+
+    "args:"+obj.spec.containers[0].args+"<br>"+
+    "</div>"
+
+    document.getElementById("myDiv").innerHTML=htmltext;
+    
+    }
+}
+xmlhttp.open("GET","/pod/"+name+"?namespace="+namespace,true);
+xmlhttp.send();
+}
+
+//DelPod DelPod
+function DelPod(name,namespace){
+    var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+      loadPods();    
+    }
+}
+xmlhttp.open("DELETE","/pod/"+name+"?namespace="+namespace,true);
+xmlhttp.send();
+}
+
+//loadRc loadRc
+function loadRc(){
+    var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+      var obj=JSON.parse(xmlhttp.responseText);
+      var htmltext="<div class='col-10 header'><h2>ReplicationControllers</h2>"+
+    "<table><tr><th>name</th><th>labels</th><th>pods</th><th>create_time</th><th>images</th><th>operate</th></tr>";
+    var items=obj.items;
+    for (var i=0;i<items.length;i=i+1){
+        htmltext=htmltext+"<tr><td onclick=loadRCDetail('"+items[i].metadata.name+"','"+items[i].metadata.namespace+"')><font color='blue'>"+
+        obj.items[i].metadata.name+
+        "</font></td>"+
+        "<td>"+obj.items[i].metadata.labels+"</td>"+
+        "<td>"+obj.items[i].spec.replicas+"</td>"+
+         "<td>"+obj.items[i].metadata.creationTimestamp+"</td>"+
+         "<td>"+obj.items[i].spec.template.spec.containers[0].image+"</td>"+
+        "<td onclick=DelRC('"+items[i].metadata.name+"','"+items[i].metadata.namespace+"')><font color='blue'>"+"delete"+
+        "</font></td></tr>";
+    }
+    htmltext=htmltext+"</table></div>";
+    htmltext=htmltext+"<div><button type='button' onclick=createRC()>创建</button></div>";
+    document.getElementById("myDiv").innerHTML=htmltext;
+      //document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+    }
+}
+xmlhttp.open("GET","/replicationcontroller/list",true);
+xmlhttp.send();
+}
+
+  //createRC createRC
+  function createRC() {
+    var ajaxobj = new AJAXRequest;    // 创建AJAX对象,类在刚刚那个文件里了
+    ajaxobj.method = "GET";   // 设置请求方式为GET
+    ajaxobj.url = "./createrc.html"  // 响应的URL,以后可以改为一些动态处理页,会用Ajax的都知道，这在页里可以有目的返回不同的数据
+    // 设置回调函数，输出响应内容,因为是静态页（这是我的需求嘛）所以所有内容都过来了
+    ajaxobj.callback = function (xmlobj) {
+      document.getElementById("div").innerHTML = xmlobj.responseText;     //可要看好这句话哦
+    }
+    ajaxobj.send();    // 发送请求
+    //document.getElementById("myDiv").innerHTML="hello world";
+  }
+
+//loadService loadService
+function loadService(){
+    var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+      document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+    }
+}
+xmlhttp.open("GET","/service/list",true);
+xmlhttp.send();
+}
+
+function Router() {
+    this.routes = {};
+    this.currentUrl = '';
+}
+Router.prototype.route = function(path, callback) {
+    this.routes[path] = callback || function(){};
+};
+Router.prototype.refresh = function() {
+    this.currentUrl = location.hash.slice(1) || '/';
+    this.routes[this.currentUrl]();
+};
+Router.prototype.init = function() {
+    window.addEventListener('load', this.refresh.bind(this), false);
+    window.addEventListener('hashchange', this.refresh.bind(this), false);
+}
+window.Router = new Router();
+window.Router.init();
+
+
+// var content = document.querySelector('body');
+// // change Page anything
+// function changeBgColor(color) {
+//     content.style.backgroundColor = color;
+// }
+Router.route('/nodes', function() {
+    //changeBgColor('white');
+    loadXMLDoc();
+});
+Router.route('/pods', function() {
+    //changeBgColor('blue');
+    loadPods();
+});
+Router.route('/replicationcontrollers', function() {
+    //changeBgColor('blue');
+    loadRc();
+});
+Router.route('/services', function() {
+    //changeBgColor('green');
+    loadService();
+});
+</script>
+
+</head>
+<body>
+<div class="header">
+  <h2>myapp</h2>
+</div>
+<div class="col-2 menu">
+    <ul>
+        <li><a href="#/nodes">Nodes</a></li>
+        <li><a href="#/services">Services</a></li>
+        <li><a href="#/replicationcontrollers">Replication Controllers</a></li>
+        <li><a href="#/pods">Pods</a></li>
+        <li>Images</li>
+        </ul>
+</div>
+
+<div class="col-10" id="myDiv">
+  
+</div>
+
+</body>
+</html>

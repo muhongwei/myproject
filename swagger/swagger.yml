@@ -1,0 +1,86 @@
+swagger: "2.0"
+info:
+  title: mobile API
+  description: mobile has every tool to get any job done, so codename for the new
+    mobile APIs.
+  version: 1.0.0
+  contact:
+    email: astaxie@gmail.com
+basePath: /v1
+paths:
+  /pod/delete:
+    delete:
+      tags:
+      - pod
+      description: Delete Pod
+      operationId: PodController.Delete Pod
+      parameters:
+      - in: query
+        name: name
+        description: name
+        required: true
+        type: string
+      - in: query
+        name: namespace
+        description: namespace
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/.Pod'
+        "400":
+          description: no enough input
+        "500":
+          description: delete pod common error
+  /pod/get:
+    get:
+      tags:
+      - pod
+      description: Get Pod
+      operationId: PodController.Get Pod
+      parameters:
+      - in: query
+        name: name
+        description: name
+        required: true
+        type: string
+      - in: query
+        name: namespace
+        description: namespace
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/.Pod'
+        "400":
+          description: no enough input
+        "500":
+          description: get pod common error
+  /pod/list:
+    get:
+      tags:
+      - pod
+      description: Get Pod list
+      operationId: PodController.Get Pod list
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/.PodList'
+        "400":
+          description: no enough input
+        "500":
+          description: get pods common error
+definitions:
+  .Pod:
+    type: object
+  .PodList:
+    type: object
+tags:
+- name: pod
+  description: |
+    PodController PodController
