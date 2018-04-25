@@ -26,12 +26,19 @@ func (c *PodController) ListPods() {
 	a := pod.ListPods()
 	c.Data["json"] = a
 
-	// var vlog log.Log
-	// sess := c.StartSession()
-	// vlog.UserName = interface{}(sess.Get("username")).(string)
-	// vlog.API = "/user/pod/list"
-	// vlog.Method = "get"
-	// log.InsertLog(vlog)
+	var vlog log.Log
+	sess := c.StartSession()
+	username := sess.Get("username")
+	if username == nil {
+		c.CustomAbort(400, "login first")
+		return
+	} else {
+		vlog.UserName = interface{}(username).(string)
+		vlog.API = "/user/pod/list"
+		vlog.Method = "get"
+		log.InsertLog(vlog)
+
+	}
 
 	c.ServeJSON()
 }

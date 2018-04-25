@@ -94,4 +94,12 @@ func init() {
 	beego.Router("/image/delete", &controllers.ImageController{}, "delete:DelImage")
 	//PVC PVC
 	beego.Router("/pvc/list", &controllers.PVCController{}, "get:ListPVC")
+	beego.Router("/pvc/get/:name", &controllers.PVCController{}, "get:GetPVC")
+	beego.Router("/pvc/delete/:name", &controllers.PVCController{}, "delete:DeletePVC")
+	beego.Router("/pvc/create", &controllers.PVCController{}, "post:CreatePVC")
+	//PV PV
+	beego.Router("/pv/list", &controllers.PVController{}, "get:ListPV")
+	beego.Router("/pv/get/:name", &controllers.PVController{}, "get:GetPV")
+	beego.Router("/pv/delete/:name", &controllers.PVController{}, "delete:DeletePV")
+	beego.Router("/pv/create", &controllers.PVController{}, "post:CreatePV")
 }

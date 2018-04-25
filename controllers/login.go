@@ -56,7 +56,7 @@ func (c *LoginController) Post() {
 		vlog.Method = "post"
 		log.InsertLog(vlog)
 
-		c.Redirect("/user/pod/list", 302)
+		c.Redirect("/user/info", 302)
 		// c.TplName = "pods.html"
 	} else {
 		//记录用户登录信息

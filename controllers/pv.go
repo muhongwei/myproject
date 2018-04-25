@@ -2,20 +2,21 @@ package controllers
 
 import (
 	"encoding/json"
-	"myproject/models/pvc"
+	//"myproject/models/log"
+	"myproject/models/pv"
 
 	"github.com/astaxie/beego"
 	"github.com/golang/glog"
 )
 
-//PVCController PVCController
-type PVCController struct {
+//PVController PVController
+type PVController struct {
 	beego.Controller
 }
 
-//ListPVC ListPVC
-func (c *PVCController) ListPVC() {
-	a := pvc.ListPVC()
+//ListPV ListPV
+func (c *PVController) ListPV() {
+	a := pv.ListPV()
 	c.Data["json"] = a
 
 	// var vlog log.Log
@@ -28,10 +29,10 @@ func (c *PVCController) ListPVC() {
 	c.ServeJSON()
 }
 
-//CreatePVC CreatePVC
-func (c *PVCController) CreatePVC() {
+//CreatePV CreatePV
+func (c *PVController) CreatePV() {
 	body := c.Ctx.Input.CopyBody(beego.BConfig.MaxMemory)
-	request := &pvc.PVCMessage{}
+	request := &pv.PVMessage{}
 	marshalerr := json.Unmarshal([]byte(body), request)
 	if marshalerr != nil {
 		glog.Errorln(marshalerr)
@@ -39,7 +40,7 @@ func (c *PVCController) CreatePVC() {
 
 	}
 	glog.Errorln(request)
-	err := pvc.CreatePVC(request)
+	err := pv.CreatePV(request)
 	if err == nil {
 		c.Data["json"] = map[string]string{"result": "ok"}
 	} else {
@@ -50,18 +51,18 @@ func (c *PVCController) CreatePVC() {
 	c.ServeJSON()
 }
 
-//GetPVC GetPVC
-func (c *PVCController) GetPVC() {
+//GetPV GetPV
+func (c *PVController) GetPV() {
 	name := c.GetString(":name")
-	a := pvc.GetPVC(name)
+	a := pv.GetPV(name)
 	c.Data["json"] = a
 	c.ServeJSON()
 }
 
-//DeletePVC DeletePVC
-func (c *PVCController) DeletePVC() {
+//DeletePV DeletePV
+func (c *PVController) DeletePV() {
 	name := c.GetString(":name")
-	err := pvc.DeletePVC(name)
+	err := pv.DeletePV(name)
 	if err == nil {
 		c.Data["json"] = map[string]string{"result": "ok"}
 	} else {
