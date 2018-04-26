@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	//"myproject/models/log"
+	"myproject/models/log"
 	"myproject/models/pv"
 
 	"github.com/astaxie/beego"
@@ -19,12 +20,19 @@ func (c *PVController) ListPV() {
 	a := pv.ListPV()
 	c.Data["json"] = a
 
-	// var vlog log.Log
-	// sess := c.StartSession()
-	// vlog.UserName = interface{}(sess.Get("username")).(string)
-	// vlog.API = "/user/pvc/list"
-	// vlog.Method = "get"
-	// log.InsertLog(vlog)
+	var vlog log.Log
+	sess := c.StartSession()
+	username := sess.Get("username")
+	if username == nil {
+		c.CustomAbort(400, "login first")
+		return
+	} else {
+		vlog.UserName = interface{}(username).(string)
+		vlog.API = "/user/pv/list"
+		vlog.Method = "get"
+		log.InsertLog(vlog)
+
+	}
 
 	c.ServeJSON()
 }
@@ -48,6 +56,20 @@ func (c *PVController) CreatePV() {
 		return
 		//c.Data["json"] = map[string]string{"result": err.Error()}
 	}
+
+	var vlog log.Log
+	sess := c.StartSession()
+	username := sess.Get("username")
+	if username == nil {
+		c.CustomAbort(400, "login first")
+		return
+	} else {
+		vlog.UserName = interface{}(username).(string)
+		vlog.API = "/user/pv/create"
+		vlog.Method = "get"
+		log.InsertLog(vlog)
+
+	}
 	c.ServeJSON()
 }
 
@@ -56,6 +78,21 @@ func (c *PVController) GetPV() {
 	name := c.GetString(":name")
 	a := pv.GetPV(name)
 	c.Data["json"] = a
+
+	var vlog log.Log
+	sess := c.StartSession()
+	username := sess.Get("username")
+	if username == nil {
+		c.CustomAbort(400, "login first")
+		return
+	} else {
+		vlog.UserName = interface{}(username).(string)
+		vlog.API = "/user/pv/get/" + name
+		vlog.Method = "get"
+		log.InsertLog(vlog)
+
+	}
+
 	c.ServeJSON()
 }
 
@@ -70,5 +107,33 @@ func (c *PVController) DeletePV() {
 		return
 		//c.Data["json"] = map[string]string{"result": err.Error()}
 	}
+	var vlog log.Log
+	sess := c.StartSession()
+	username := sess.Get("username")
+	if username == nil {
+		c.CustomAbort(400, "login first")
+		return
+	} else {
+		vlog.UserName = interface{}(username).(string)
+		vlog.API = "/user/pv/delete/" + name
+		vlog.Method = "delete"
+		log.InsertLog(vlog)
+
+	}
 	c.ServeJSON()
+}
+
+//UserListPV UserListPV
+func (c *PVController) UserListPV() {
+	c.TplName = "pvlist.html"
+}
+
+//UserCreatePV UserCreatePV
+func (c *PVController) UserCreatePV() {
+	c.TplName = "pvcreate.html"
+}
+
+//UserGetPV UserGetPV
+func (c *PVController) UserGetPV() {
+	c.TplName = "pv.html"
 }

@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"strconv"
 
 	"github.com/golang/glog"
 	//"github.com/astaxie/beedb"
@@ -12,10 +13,10 @@ import (
 
 //User User
 type User struct {
-	UserId           int
-	UserName         string
-	UserPassword     string
-	UserIntroduction string
+	UserId           int    `json:"userid,omitempty"`
+	UserName         string `json:"username,omitempty"`
+	UserPassword     string `json:"userpassword,omitempty"`
+	UserIntroduction string `json:"userintroduction,omitempty"`
 }
 
 //初始化一个数据库连接
@@ -49,6 +50,19 @@ func FindUser(user User) *User {
 
 }
 
+//DeleteUser DeleteUser
+func DeleteUser(user User) error {
+	db := initMysql()
+	defer db.Close()
+	sql := "delete  from `myapp`.`user` where userId = " + strconv.Itoa(user.UserId)
+	glog.Infoln(sql)
+	_, err := db.Query(sql)
+	if err != nil {
+		glog.Fatalln(err)
+	}
+	return err
+}
+
 //SaveUser SaveUser
 func SaveUser(user User) error {
 	db := initMysql()
@@ -77,4 +91,31 @@ func ValidateUser(user User) error {
 	}
 	return errors.New("用户名或密码错误！")
 
+}
+
+//GetAllUser GetAllUser
+func GetAllUser() []User {
+	users := []User{}
+	db := initMysql()
+	defer db.Close()
+	row, err := db.Query("select userId,userName,userPassword,userIntroduction from `myapp`.`user`")
+	if err != nil {
+		glog.Fatalln(err)
+	}
+	var id int
+	var name string = ""
+	var pwd string = ""
+	var intro string = ""
+	for row.Next() {
+		row.Scan(&id, &name, &pwd, &intro)
+		// log.Println("id:", id, ",name:", name, "password:", password,"introduction:",introduction)
+		var user User
+		user.UserId = id
+		user.UserName = name
+		user.UserPassword = pwd
+		user.UserIntroduction = intro
+		users = append(users, user)
+
+	}
+	return users
 }

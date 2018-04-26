@@ -121,6 +121,10 @@
             <span class="am-icon-angle-right am-fr am-margin-right"></span>
           </a>
           <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-storagemanage">
+                <li>
+                        <a href="/user/pv/list">
+                          <span class="am-icon-pencil-square-o"></span> pv</a>
+                      </li>
             <li>
               <a href="/user/pvc/list">
                 <span class="am-icon-pencil-square-o"></span> pvc</a>
@@ -267,7 +271,7 @@
                     htmltext +=
                         '<tr>' +
                         '<td>' +
-                        '<a href="#">' + obj.items[i].metadata.name + '</a>' +
+                        '<a href="/user/replicationcontroller/'+obj.items[i].metadata.name+'">' + obj.items[i].metadata.name + '</a>' +
                         '</td>' +
                         '<td>';
                         for(var k in obj.items[i].metadata.labels){

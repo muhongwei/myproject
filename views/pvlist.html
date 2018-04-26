@@ -75,111 +75,111 @@
 
     <div class="am-cf admin-main">
         <!-- sidebar start -->
-    <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
-        <div class="am-offcanvas-bar admin-offcanvas-bar">
-          <ul class="am-list admin-sidebar-list">
+   <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+    <div class="am-offcanvas-bar admin-offcanvas-bar">
+      <ul class="am-list admin-sidebar-list">
+        <li>
+          <a href="/user/info">
+            <span class="am-icon-home"></span> 首页</a>
+        </li>
+        
+        <li class="admin-parent">
+          <a class="am-cf" data-am-collapse="{target: '#collapse-nodemanage'}">
+            <span class="am-icon-file"></span> 节点管理
+            <span class="am-icon-angle-right am-fr am-margin-right"></span>
+          </a>
+          <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-nodemanage">
             <li>
-              <a href="/user/info">
-                <span class="am-icon-home"></span> 首页</a>
+              <a href="/user/node/list">
+                <span class="am-icon-pencil-square-o"></span> node</a>
             </li>
-            
-            <li class="admin-parent">
-              <a class="am-cf" data-am-collapse="{target: '#collapse-nodemanage'}">
-                <span class="am-icon-file"></span> 节点管理
-                <span class="am-icon-angle-right am-fr am-margin-right"></span>
-              </a>
-              <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-nodemanage">
-                <li>
-                  <a href="/user/node/list">
-                    <span class="am-icon-pencil-square-o"></span> node</a>
-                </li>
-              </ul>
-            </li>
-            <li class="admin-parent">
-              <a class="am-cf" data-am-collapse="{target: '#collapse-appmanage'}">
-                <span class="am-icon-file"></span> 应用管理
-                <span class="am-icon-angle-right am-fr am-margin-right"></span>
-              </a>
-              <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-appmanage">
-                <li>
-                  <a href="/user/pod/list">
-                    <span class="am-icon-table"></span> pod</a>
-                </li>
-                <li>
-                  <a href="/user/replicationcontroller/list">
-                    <span class="am-icon-pencil-square-o"></span> replicationcontroler</a>
-                </li>
-                <li>
-                  <a href="/user/service/list">
-                    <span class="am-icon-pencil-square-o"></span> service</a>
-                </li>
-              </ul>
-            </li>
-            <li class="admin-parent">
-              <a class="am-cf" data-am-collapse="{target: '#collapse-storagemanage'}">
-                <span class="am-icon-file"></span> 存储管理
-                <span class="am-icon-angle-right am-fr am-margin-right"></span>
-              </a>
-              <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-storagemanage">
-            <li>
-              <a href="/user/pv/list">
-                <span class="am-icon-pencil-square-o"></span> pv</a>
-            </li>
-                <li>
-                  <a href="/user/pvc/list">
-                    <span class="am-icon-pencil-square-o"></span> pvc</a>
-                </li>
-              </ul>
-            </li>
-            <li class="admin-parent">
-              <a class="am-cf" data-am-collapse="{target: '#collapse-imagemanage'}">
-                <span class="am-icon-file"></span> 镜像管理
-                <span class="am-icon-angle-right am-fr am-margin-right"></span>
-              </a>
-              <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-imagemanage">
-                <li>
-                  <a href="/user/image/list">
-                    <span class="am-icon-pencil-square-o"></span> image</a>
-                </li>
-              </ul>
-            </li>
-            <li class="admin-parent">
-              <a class="am-cf" data-am-collapse="{target: '#collapse-logsmanage'}">
-                <span class="am-icon-file"></span> 日志管理
-                <span class="am-icon-angle-right am-fr am-margin-right"></span>
-              </a>
-              <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-logsmanage">
-                <li>
-                  <a href="/user/log/list">
-                    <span class="am-icon-pencil-square-o"></span> logs</a>
-                </li>
-              </ul>
-            </li>         
-            
-            <li>
-                <a href="/user/login">
-                  <span class="am-icon-sign-out"></span> 注销</a>
-              </li>
           </ul>
-  
-          <div class="am-panel am-panel-default admin-sidebar-panel">
-            <div class="am-panel-bd">
-              <p>
-                <span class="am-icon-tag"></span> Message</p>
-              <p>Welcome to myproject!</p>
-            </div>
-          </div>
+        </li>
+        <li class="admin-parent">
+          <a class="am-cf" data-am-collapse="{target: '#collapse-appmanage'}">
+            <span class="am-icon-file"></span> 应用管理
+            <span class="am-icon-angle-right am-fr am-margin-right"></span>
+          </a>
+          <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-appmanage">
+            <li>
+              <a href="/user/pod/list">
+                <span class="am-icon-table"></span> pod</a>
+            </li>
+            <li>
+              <a href="/user/replicationcontroller/list">
+                <span class="am-icon-pencil-square-o"></span> replicationcontroler</a>
+            </li>
+            <li>
+              <a href="/user/service/list">
+                <span class="am-icon-pencil-square-o"></span> service</a>
+            </li>
+          </ul>
+        </li>
+        <li class="admin-parent">
+          <a class="am-cf" data-am-collapse="{target: '#collapse-storagemanage'}">
+            <span class="am-icon-file"></span> 存储管理
+            <span class="am-icon-angle-right am-fr am-margin-right"></span>
+          </a>
+          <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-storagemanage">
+                <li>
+                        <a href="/user/pv/list">
+                          <span class="am-icon-pencil-square-o"></span> pv</a>
+                      </li>
+            <li>
+              <a href="/user/pvc/list">
+                <span class="am-icon-pencil-square-o"></span> pvc</a>
+            </li>
+          </ul>
+        </li>
+        <li class="admin-parent">
+          <a class="am-cf" data-am-collapse="{target: '#collapse-imagemanage'}">
+            <span class="am-icon-file"></span> 镜像管理
+            <span class="am-icon-angle-right am-fr am-margin-right"></span>
+          </a>
+          <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-imagemanage">
+            <li>
+              <a href="/user/image/list">
+                <span class="am-icon-pencil-square-o"></span> image</a>
+            </li>
+          </ul>
+        </li>
+        <li class="admin-parent">
+          <a class="am-cf" data-am-collapse="{target: '#collapse-logsmanage'}">
+            <span class="am-icon-file"></span> 日志管理
+            <span class="am-icon-angle-right am-fr am-margin-right"></span>
+          </a>
+          <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-logsmanage">
+            <li>
+              <a href="/user/log/list">
+                <span class="am-icon-pencil-square-o"></span> logs</a>
+            </li>
+          </ul>
+        </li>         
+        
+        <li>
+            <a href="/user/login">
+              <span class="am-icon-sign-out"></span> 注销</a>
+          </li>
+      </ul>
+
+      <div class="am-panel am-panel-default admin-sidebar-panel">
+        <div class="am-panel-bd">
+          <p>
+            <span class="am-icon-tag"></span> Message</p>
+          <p>Welcome to myproject!</p>
         </div>
       </div>
-      <!-- sidebar end -->
+    </div>
+  </div>
+  <!-- sidebar end -->
 
         <!-- content start -->
         <div class="admin-content">
             <div class="admin-content-body">
                 <div class="am-cf am-padding am-padding-bottom-0">
                     <div class="am-fl am-cf">
-                        <strong class="am-text-primary am-text-lg">Image</strong> /
-                        <small>imagelist</small>
+                        <strong class="am-text-primary am-text-lg">表格</strong> /
+                        <small>Table</small>
                     </div>
                 </div>
 
@@ -189,7 +189,7 @@
                     <div class="am-u-sm-12 am-u-md-6">
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs">
-                                <a href="/user/image/push">
+                                <a href="/user/pv/create">
                                     <button type="button" class="am-btn am-btn-default">
                                         <span class="am-icon-plus"></span> 新增</button>
                                 </a>
@@ -205,11 +205,14 @@
                                 <thead>
                                     <tr>
                                         <th class="table-title">name</th>
-                                        <th class="table-title">lables</th>
+                                        <th class="table-title">capacity</th>
+                                        <th class="table-title">accessmodes</th>
+                                        <th class="table-title">status</th>
+                                        <th class="table-date am-hide-sm-only">createtime</th>
                                         <th class="table-set">operate</th>
                                     </tr>
                                 </thead>
-                                <tbody id="imagelist">
+                                <tbody id="pvlist">
                                 </tbody>
                             </table>
 
@@ -250,8 +253,8 @@
     <script src="assets/js/app.js"></script>
 </body>
 <script>
-    //loadImages loadImages
-    function loadImages() {
+    //loadPV loadPV
+    function loadPV() {
         var xmlhttp;
         if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -263,35 +266,41 @@
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 var obj = JSON.parse(xmlhttp.responseText);
                 var htmltext = '<div>';
-                for (var i=0;i<obj.length;i=i+1){
-                    htmltext+=
+                var items = obj.items;
+                for (var i = 0; i < items.length; i = i + 1) {
+                    htmltext +=
                         '<tr>' +
-                        '<td>' + obj[i]["name"]+ '</td>' +
-                        '<td>' + obj[i]["tag"] + '</td>' +
-                        '<td>'+
+                        '<td>' +
+                        '<a href="#">' + obj.items[i].metadata.name + '</a>' +
+                        '</td>' +
+                        '<td>' + obj.items[i].spec.capacity.storage + '</td>' +
+                        '<td>' + obj.items[i].spec.accessModes[0] + '</td>' +
+                        '<td>' + obj.items[i].status.phase + '</td>' +
+                        //'<td>' + obj.items[i].spec.claimRef.name + '</td>' +
+                        '<td>' + obj.items[i].metadata.creationTimestamp + '</td>' +
+                        // '<td>' + obj.items[i].spec.template.spec.containers[0].image + '</td>' +
+                        '<td>' +
                         '<div class="am-btn-toolbar">' +
                         '<div class="am-btn-group am-btn-group-xs">' +
                         '<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"'+
-                        'onclick=DelImage("'+obj[i]['name']+'","'+obj[i]['tag']+'")><span class="am-icon-trash-o"></span> 删除</button>' +
+                        'onclick=DelPV("'+obj.items[i].metadata.name+'")><span class="am-icon-trash-o"></span> 删除</button>' +
                         '</div>' +
                         '</div>' +
                         '</td>' +
                         '</tr>';
                 }
-                
-                
                 htmltext = htmltext + "</div>";
-                document.getElementById("imagelist").innerHTML = htmltext;
+                document.getElementById("pvlist").innerHTML = htmltext;
                 //document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
 
             }
         }
-        xmlhttp.open("GET", "/image/list", true);
+        xmlhttp.open("GET", "/pv/list", true);
         xmlhttp.send();
     }
 
-    //DelImage DelImage
-    function DelImage(name, tag) {
+    //DelPV DelPV
+    function DelPV(name) {
         var xmlhttp;
         if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -302,13 +311,15 @@
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 alert("操作成功");
-                loadImages();
+                loadRc();
+            }else{
+                alert("删除中")
             }
         }
-        xmlhttp.open("DELETE", "/image/delete?imagename=" + name + "&tag=" + tag, true);
+        xmlhttp.open("DELETE", "/pv/delete/" + name , true);
         xmlhttp.send();
     }
-    document.body.onload = loadImages;
+    document.body.onload = loadPV;
 </script>
 
 </html>

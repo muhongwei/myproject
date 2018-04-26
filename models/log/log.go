@@ -19,7 +19,7 @@ type Log struct {
 	API      string `json:"api"`
 	Method   string `json:"method"`
 }
-type LOGC struct{
+type LOGC struct {
 	beego.Controller
 }
 
@@ -45,11 +45,12 @@ func InsertLog(log Log) error {
 	_, err := db.Exec("insert into `myapp`.`log`(time,user,api,method) values(?,?,?,?)", time.Now().In(local2), log.UserName, log.API, log.Method)
 	return err
 }
+
 //ListLog ListLog
-func ListLog() []Log{
-	db:=initMysql()
+func ListLog() []Log {
+	db := initMysql()
 	defer db.Close()
-	row, err := db.Query("select time,user,api,method from `myapp`.`log` order by time desc limit 40")
+	row, err := db.Query("select time,user,api,method from `myapp`.`log` order by time desc limit 100")
 	if err != nil {
 		glog.Fatalln(err)
 		return nil
@@ -59,8 +60,8 @@ func ListLog() []Log{
 
 	for row.Next() {
 		row.Scan(&log.Time, &log.UserName, &log.API, &log.Method)
-		logs=append(logs,log)
-	
+		logs = append(logs, log)
+
 	}
 	return logs
 }
@@ -81,4 +82,3 @@ func ListLog() []Log{
 
 // 	}
 // }
-

@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Amaze UI Admin log Examples</title>
-  <meta name="description" content="这是一个log页面">
-  <meta name="keywords" content="log">
+  <title>Amaze UI Admin user Examples</title>
+  <meta name="description" content="这是一个 user 页面">
+  <meta name="keywords" content="user">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="renderer" content="webkit">
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -48,7 +48,7 @@
 </header>
 
 <div class="am-cf admin-main">
-   <!-- sidebar start -->
+    <!-- sidebar start -->
    <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
     <div class="am-offcanvas-bar admin-offcanvas-bar">
       <ul class="am-list admin-sidebar-list">
@@ -122,7 +122,7 @@
             <span class="am-icon-file"></span> 日志管理
             <span class="am-icon-angle-right am-fr am-margin-right"></span>
           </a>
-          <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-logsmanage">
+          <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-logsmanage">
             <li>
               <a href="/user/log/list">
                 <span class="am-icon-pencil-square-o"></span> logs</a>
@@ -151,16 +151,55 @@
   <div class="admin-content">
     <div class="admin-content-body">
       <div class="am-cf am-padding am-padding-bottom-0">
-        <div class="am-fl"><strong class="am-text-primary am-text-lg">log</strong> / <small>loglist</small></div>
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">user</strong> / <small>create information</small></div>
       </div>
 
       <hr/>
 
-      <div class="am-g error-log">
-        <div class="am-u-sm-12 am-u-sm-centered">
-        <pre class="am-pre-scrollable" id="loglist">
-        </pre>
-          <p>这里是静态页面展示，使用时结合代码高亮插件</p>
+      <div id="myDiv">
+
+      </div>
+
+      <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+          
+        </div>
+
+        <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+          <form class="am-form am-form-horizontal" method="post" action="/user/register">
+            <div class="am-form-group">
+              <label for="user-name" class="am-u-sm-3 am-form-label">username</label>
+              <div class="am-u-sm-9">
+                <input type="text" name="username" placeholder="username">
+                <small>输入新建用户名。</small>
+              </div>
+            </div>
+
+            <div class="am-form-group">
+              <label for="user-name" class="am-u-sm-3 am-form-label">userpassword</label>
+              <div class="am-u-sm-9">
+                <input type="text" name="pwd" placeholder="userpassword">
+                <small>输入新建用户名密码。</small>
+              </div>
+            </div>
+
+
+            <div class="am-form-group">
+              <label for="user-intro" class="am-u-sm-3 am-form-label">Introuction</label>
+              <div class="am-u-sm-9">
+                <textarea class="" rows="5" name="introduction" placeholder="introduction"></textarea>
+                <small>输入新建用户信息。</small>
+              </div>
+            </div>
+
+
+
+            <div class="am-form-group">
+              <div class="am-u-sm-9 am-u-sm-push-3">
+                <button type="submit" class="am-btn am-btn-primary">submit</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -169,6 +208,7 @@
       <hr>
       <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
     </footer>
+
   </div>
   <!-- content end -->
 
@@ -182,7 +222,7 @@
 </footer>
 
 <!--[if lt IE 9]>
-<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
@@ -191,38 +231,8 @@
 <script src="assets/js/jquery.min.js"></script>
 <!--<![endif]-->
 <script src="assets/js/amazeui.min.js"></script>
+
 <script src="assets/js/app.js"></script>
-<script>
-   //loadLog loadLog
-   function loadLog() {
-    var xmlhttp;
-    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-      xmlhttp = new XMLHttpRequest();
-    }
-    else {// code for IE6, IE5
-      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange = function () {
-      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-        var obj = JSON.parse(xmlhttp.responseText);
-        var htmltext = "<div>";
-        var obj = obj;
-        for(var i=0;i<obj.length;i=i+1){
-          //htmltext+='<h>'+obj[i].time+'</h>'
-          htmltext+='<span class="am-text-success">'+obj[i].time+'</span> <span class="am-text-danger">'+obj[i].method+
-          '</span> <span class="am-text-success">'+obj[i].username+'</span> '+obj[i].api+'<br>';
-        }
-        
-        htmltext = htmltext + "</div>";
-        document.getElementById("loglist").innerHTML = htmltext;
-      }
-    }
-    xmlhttp.open("GET", "/log/list", true);
-    xmlhttp.send();
-  }
 
-
-  document.body.onload = loadLog;
-</script>
 </body>
 </html>

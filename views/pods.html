@@ -122,6 +122,10 @@
               <span class="am-icon-angle-right am-fr am-margin-right"></span>
             </a>
             <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-storagemanage">
+                <li>
+                    <a href="/user/pv/list">
+                      <span class="am-icon-pencil-square-o"></span> pv</a>
+                  </li>
               <li>
                 <a href="/user/pvc/list">
                   <span class="am-icon-pencil-square-o"></span> pvc</a>
@@ -258,12 +262,11 @@
       xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
     xmlhttp.onreadystatechange = function () {
-      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-        alert("操作成功")
-        loadPods();
-      }else{
-        alert("删除中")
-      }
+      // if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      //   alert("操作成功")
+      //   loadPods();
+      // }
+      loadPods();
     }
     xmlhttp.open("DELETE", "/pod/delete/" + name + "?namespace=" + namespace, true);
     xmlhttp.send();

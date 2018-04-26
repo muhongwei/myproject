@@ -1,7 +1,6 @@
 package pvc
 
 import (
-	"fmt"
 	"myproject/models/myk8sclient"
 
 	corev1 "k8s.io/api/core/v1"
@@ -22,9 +21,9 @@ func ListPVC() *corev1.PersistentVolumeClaimList {
 	if err != nil {
 		panic(err.Error())
 	}
-	for _, pvc := range pvcs.Items {
-		fmt.Println(pvc.ObjectMeta.Name)
-	}
+	// for _, pvc := range pvcs.Items {
+	// 	fmt.Println(pvc.ObjectMeta.Name)
+	// }
 	return pvcs
 
 }

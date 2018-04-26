@@ -43,8 +43,12 @@ func init() {
 	beego.Router("/", &controllers.MainController{})
 
 	//User User
-	beego.Router("/user/login", &controllers.LoginController{})
-	beego.Router("/user/info", &controllers.LoginController{}, "get:UserInfo")
+	beego.Router("/user/login", &controllers.UserController{})
+	beego.Router("/user/info", &controllers.UserController{}, "get:UserInfo")
+	beego.Router("/user/register", &controllers.UserController{}, "post:RegisterUser")
+	beego.Router("/user/delete/:id", &controllers.UserController{}, "delete:DeleteUser")
+	beego.Router("/user/registerpage", &controllers.UserController{}, "get:UserRegisterPage")
+	beego.Router("/user/getalluser", &controllers.UserController{}, "get:GetAllUser")
 
 	beego.Router("/user/node/list", &controllers.NodeController{}, "get:UserListNode")
 	beego.Router("/user/node/:name", &controllers.NodeController{}, "get:UserGetNode")
@@ -59,6 +63,14 @@ func init() {
 	beego.Router("/user/service/list", &controllers.ServiceController{}, "get:UserListService")
 	beego.Router("/user/service/create", &controllers.ServiceController{}, "get:UserCreateService")
 	beego.Router("/user/service/get/:name", &controllers.ServiceController{}, "get:UserGetService")
+
+	beego.Router("/user/pv/list", &controllers.PVController{}, "get:UserListPV")
+	beego.Router("/user/pv/create", &controllers.PVController{}, "get:UserCreatePV")
+	beego.Router("/user/pv/get/:name", &controllers.PVController{}, "get:UserGetPV")
+
+	beego.Router("/user/pvc/list", &controllers.PVCController{}, "get:UserListPVC")
+	beego.Router("/user/pvc/create", &controllers.PVCController{}, "get:UserCreatePVC")
+	beego.Router("/user/pvc/get/:name", &controllers.PVCController{}, "get:UserGetPVC")
 
 	beego.Router("/user/log/list", &controllers.LogController{}, "get:ListLog")
 

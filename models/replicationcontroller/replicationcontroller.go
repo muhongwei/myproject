@@ -4,24 +4,39 @@ import (
 	"errors"
 	"myproject/models/myk8sclient"
 
+	"github.com/golang/glog"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 // RcMessage RcMessage
 type RcMessage struct {
-	Name       string      `json:"name"`
-	Replicas   int32       `json:"replicas"`
-	Containers []Container `json:"containers"`
+	Name       string       `json:"name"`
+	Replicas   int32        `json:"replicas"`
+	Containers []Container  `json:"containers"`
+	Volumes    []VolumeInfo `json:"volume"`
 }
 
 //Container Container
 type Container struct {
-	ContainerName  string   `json:"containername"`
-	ContainerImage string   `json:"containerimage"`
-	Envs           []Env    `json:"env,omitempty"`
-	Ports          []int32  `json:"ports"`
-	Commands       []string `json:"command,omitempty"`
+	ContainerName  string             `json:"containername"`
+	ContainerImage string             `json:"containerimage"`
+	Envs           []Env              `json:"env,omitempty"`
+	Ports          []int32            `json:"ports"`
+	Commands       []string           `json:"command,omitempty"`
+	VolumeMounts   []VolumeMountsInfo `json:"volumemountinfo"`
+}
+
+//VolumeInfo VolumeInfo
+type VolumeInfo struct {
+	Name      string `json:"name"`
+	ClaimName string `json:"claimname"`
+}
+
+//VolumeMountsInfo VolumeMountsInfo
+type VolumeMountsInfo struct {
+	Name      string `json:"name"`
+	MountPath string `json:"mountpath"`
 }
 
 //Env Env
@@ -117,35 +132,67 @@ func CreateReplicationControllers(req *RcMessage) error {
 	for _, container := range req.Containers {
 		var ports []corev1.ContainerPort
 		var envs []corev1.EnvVar
+		var volumeMounts []corev1.VolumeMount
+
 		for _, port := range container.Ports {
 			p := corev1.ContainerPort{
 				ContainerPort: port,
 			}
-			for _, e := range container.Envs {
-				env := corev1.EnvVar{
-					Name:  e.Name,
-					Value: e.Value,
-				}
-				envs = append(envs, env)
-			}
 			ports = append(ports, p)
+
 		}
+
+		for _, e := range container.Envs {
+			env := corev1.EnvVar{
+				Name:  e.Name,
+				Value: e.Value,
+			}
+			envs = append(envs, env)
+		}
+
+		for _, v := range container.VolumeMounts {
+			vm := corev1.VolumeMount{
+				Name:      v.Name,
+				MountPath: v.MountPath,
+			}
+			volumeMounts = append(volumeMounts, vm)
+		}
+
 		//副本控制器容器模板
 		c := corev1.Container{
-			Name:    container.ContainerName,
-			Image:   container.ContainerImage,
-			Env:     envs,
-			Ports:   ports,
-			Command: container.Commands,
+			Name:         container.ContainerName,
+			Image:        container.ContainerImage,
+			Env:          envs,
+			Ports:        ports,
+			Command:      container.Commands,
+			VolumeMounts: volumeMounts,
 		}
 		containers = append(containers, c)
 	}
 	rc.Spec.Template.Spec.Containers = containers
 
+	//volume绑定pvc信息
+	var volumes []corev1.Volume
+	for _, volume := range req.Volumes {
+		v := corev1.Volume{
+			Name: volume.Name,
+			VolumeSource: corev1.VolumeSource{
+				PersistentVolumeClaim: &corev1.PersistentVolumeClaimVolumeSource{
+					ClaimName: volume.ClaimName,
+				},
+			},
+		}
+		volumes = append(volumes, v)
+	}
+	rc.Spec.Template.Spec.Volumes = volumes
 	// exists, geterr := client.CoreV1().ReplicationControllers("default").Get(req.Name, metav1.GetOptions{})
 	// if exists != nil {
 	// 	return errors.New("The name have existed in the cluster")
 	// }
+	//fmt.Println(rc)
 	_, err := client.CoreV1().ReplicationControllers("default").Create(rc)
+	if err != nil {
+		glog.Errorln(err)
+	}
 	return err
 }

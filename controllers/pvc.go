@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"myproject/models/log"
 	"myproject/models/pvc"
 
 	"github.com/astaxie/beego"
@@ -18,12 +19,19 @@ func (c *PVCController) ListPVC() {
 	a := pvc.ListPVC()
 	c.Data["json"] = a
 
-	// var vlog log.Log
-	// sess := c.StartSession()
-	// vlog.UserName = interface{}(sess.Get("username")).(string)
-	// vlog.API = "/user/pvc/list"
-	// vlog.Method = "get"
-	// log.InsertLog(vlog)
+	var vlog log.Log
+	sess := c.StartSession()
+	username := sess.Get("username")
+	if username == nil {
+		c.CustomAbort(400, "login first")
+		return
+	} else {
+		vlog.UserName = interface{}(username).(string)
+		vlog.API = "/user/pvc/list"
+		vlog.Method = "get"
+		log.InsertLog(vlog)
+
+	}
 
 	c.ServeJSON()
 }
@@ -47,6 +55,21 @@ func (c *PVCController) CreatePVC() {
 		return
 		//c.Data["json"] = map[string]string{"result": err.Error()}
 	}
+
+	var vlog log.Log
+	sess := c.StartSession()
+	username := sess.Get("username")
+	if username == nil {
+		c.CustomAbort(400, "login first")
+		return
+	} else {
+		vlog.UserName = interface{}(username).(string)
+		vlog.API = "/user/pvc/create"
+		vlog.Method = "post"
+		log.InsertLog(vlog)
+
+	}
+
 	c.ServeJSON()
 }
 
@@ -55,6 +78,21 @@ func (c *PVCController) GetPVC() {
 	name := c.GetString(":name")
 	a := pvc.GetPVC(name)
 	c.Data["json"] = a
+
+	var vlog log.Log
+	sess := c.StartSession()
+	username := sess.Get("username")
+	if username == nil {
+		c.CustomAbort(400, "login first")
+		return
+	} else {
+		vlog.UserName = interface{}(username).(string)
+		vlog.API = "/user/pvc/get/" + name
+		vlog.Method = "get"
+		log.InsertLog(vlog)
+
+	}
+
 	c.ServeJSON()
 }
 
@@ -69,5 +107,35 @@ func (c *PVCController) DeletePVC() {
 		return
 		//c.Data["json"] = map[string]string{"result": err.Error()}
 	}
+
+	var vlog log.Log
+	sess := c.StartSession()
+	username := sess.Get("username")
+	if username == nil {
+		c.CustomAbort(400, "login first")
+		return
+	} else {
+		vlog.UserName = interface{}(username).(string)
+		vlog.API = "/user/pvc/delete/" + name
+		vlog.Method = "delete"
+		log.InsertLog(vlog)
+
+	}
+
 	c.ServeJSON()
+}
+
+//UserListPVC UserListPVC
+func (c *PVCController) UserListPVC() {
+	c.TplName = "pvclist.html"
+}
+
+//UserCreatePVC UserCreatePVC
+func (c *PVCController) UserCreatePVC() {
+	c.TplName = "pvccreate.html"
+}
+
+//UserGetPVC UserGetPVC
+func (c *PVCController) UserGetPVC() {
+	c.TplName = "pvc.html"
 }

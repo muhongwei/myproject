@@ -95,6 +95,10 @@
             <span class="am-icon-angle-right am-fr am-margin-right"></span>
           </a>
           <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-storagemanage">
+              <li>
+                  <a href="/user/pv/list">
+                    <span class="am-icon-pencil-square-o"></span> pv</a>
+                </li>
             <li>
               <a href="/user/pvc/list">
                 <span class="am-icon-pencil-square-o"></span> pvc</a>
@@ -224,6 +228,38 @@
                   </div>
                 </div>
 
+                <div class="am-form-group">
+                  <label for="user-name" class="am-u-sm-3 am-form-label">ContainerVolumeName</label>
+                  <div class="am-u-sm-9">
+                    <input type="text" id="container_volumemountname" placeholder="可以不需要存储绑定名字">
+                    <small>输入应用容器存储绑定名字</small>
+                  </div>
+                </div>
+
+                <div class="am-form-group">
+                  <label for="user-name" class="am-u-sm-3 am-form-label">ContainerVolumeMount</label>
+                  <div class="am-u-sm-9">
+                    <input type="text" id="container_volumemount" placeholder="可以不需要存储目录绑定">
+                    <small>输入应用容器存储绑定目录</small>
+                  </div>
+                </div>
+
+                <div class="am-form-group">
+                  <label for="user-name" class="am-u-sm-3 am-form-label">VolumeName</label>
+                  <div class="am-u-sm-9">
+                    <input type="text" id="volumename" placeholder="可以不需要应用存储绑定">
+                    <small>输入应用存储绑定名字</small>
+                  </div>
+                </div>
+
+                <div class="am-form-group">
+                  <label for="user-name" class="am-u-sm-3 am-form-label">ClaimName</label>
+                  <div class="am-u-sm-9">
+                    <input type="text" id="claimname" placeholder="可以不需要应用存储绑定">
+                    <small>输入应用存储绑定pvc名字</small>
+                  </div>
+                </div>
+
             <div class="am-form-group">
               <div class="am-u-sm-9 am-u-sm-push-3">
                 <button onclick="createRC()" class="am-btn am-btn-primary">submit</button>
@@ -318,23 +354,35 @@
         var container_name=document.getElementById("container_name").value;
         var image_name=document.getElementById("image_name").value;
         var container_port=Number(document.getElementById("container_port").value);
-        // var ENV_key=document.getElementById("ENV_key").value;
-        // var ENV_value=document.getElementById("ENV_value").value;
-        
-        
-
-        // var ENV={};
-        // ENV.name=ENV_key;
-        // ENV.value=ENV_value;
+        var container_command=document.getElementById("container_command").value;
+        var container_volumemountname=document.getElementById("container_volumemountname").value;
+        var container_volumemount=document.getElementById("container_volumemount").value;
+        var volumename=document.getElementById("volumename").value;
+        var claimname=document.getElementById("claimname").value;
 
         var obj={};
+        var volume={};
         var container={};
         var port=[container_port];
+        var volumemountinfo={};
+        
+        volume.name=volumename;
+        volume.claimname=claimname;
+        
+        volumemountinfo.name=container_volumemountname;
+        volumemountinfo.mountpath=container_volumemount;
 
 
         container.containername=container_name;
         container.containerimage=image_name;
         container.ports=port;
+        if (container_command.length!=0){
+          container.command=[container_command];
+        }
+        if(container_volumemountname.length!=0&&container_volumemount.length!=0){
+          container.volumemountinfo=[volumemountinfo];
+        }
+        
 
         var ks=document.getElementsByName("ENV_key");
         var vs=document.getElementsByName("ENV_value");
@@ -350,7 +398,12 @@
 
         obj.name=replicationcontroller_name;
         obj.replicas=replicates;
-        obj.containers=[container]
+        obj.containers=[container];
+
+        if (volumename.length!=0&&claimname.length!=0){
+          obj.volume=[volume];
+        }
+        
 
         var a=JSON.stringify(obj,undefined,2)
 
