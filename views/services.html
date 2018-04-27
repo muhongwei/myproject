@@ -277,8 +277,6 @@
       if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
         alert("删除成功")
         loadServices();
-      }else{
-        alert("删除中")
       }
     }
     xmlhttp.open("DELETE", "/service/delete/" + name , true);

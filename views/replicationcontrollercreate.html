@@ -170,7 +170,7 @@
             <div class="am-form-group">
               <label for="user-name" class="am-u-sm-3 am-form-label">Name</label>
               <div class="am-u-sm-9">
-                <input type="text" id="replicationcontroller_name" placeholder="redis-master">
+                <input type="text" id="replicationcontroller_name" placeholder="mysql">
                 <small>输入副本控制器的名字</small>
               </div>
             </div>
@@ -186,7 +186,7 @@
             <div class="am-form-group">
               <label for="user-name" class="am-u-sm-3 am-form-label">ContainerName</label>
               <div class="am-u-sm-9">
-                <input type="text" id="container_name" placeholder="master">
+                <input type="text" id="container_name" placeholder="mysql">
                 <small>输入容器名字</small>
               </div>
             </div>
@@ -215,48 +215,48 @@
               <div class="am-form-group">
                   <label for="user-name" class="am-u-sm-3 am-form-label">ContainerPort</label>
                   <div class="am-u-sm-9">
-                    <input type="number" id="container_port" placeholder="6379">
-                    <small>输入容器映射端口</small>
+                    <input type="number" id="container_port" placeholder="3306">
+                    <small>输入容器服务端口</small>
                   </div>
                 </div>
 
                 <div class="am-form-group">
                   <label for="user-name" class="am-u-sm-3 am-form-label">ContainerCommand</label>
                   <div class="am-u-sm-9">
-                    <input type="text" id="container_command" placeholder="可以不需要应用启动命令">
-                    <small>输入应用启动命令</small>
+                    <input type="text" id="container_command" placeholder="./myapp">
+                    <small>输入应用启动命令（可以为空）</small>
                   </div>
                 </div>
 
                 <div class="am-form-group">
                   <label for="user-name" class="am-u-sm-3 am-form-label">ContainerVolumeName</label>
                   <div class="am-u-sm-9">
-                    <input type="text" id="container_volumemountname" placeholder="可以不需要存储绑定名字">
-                    <small>输入应用容器存储绑定名字</small>
+                    <input type="text" id="container_volumemountname" placeholder="mysql">
+                    <small>输入应用容器存储绑定名字(不使用持久储存信息可以不用填写)</small>
                   </div>
                 </div>
 
                 <div class="am-form-group">
                   <label for="user-name" class="am-u-sm-3 am-form-label">ContainerVolumeMount</label>
                   <div class="am-u-sm-9">
-                    <input type="text" id="container_volumemount" placeholder="可以不需要存储目录绑定">
-                    <small>输入应用容器存储绑定目录</small>
+                    <input type="text" id="container_volumemount" placeholder="/var/lib/mysql">
+                    <small>输入应用容器存储绑定目录(不使用持久储存信息可以不用填写)</small>
                   </div>
                 </div>
 
                 <div class="am-form-group">
                   <label for="user-name" class="am-u-sm-3 am-form-label">VolumeName</label>
                   <div class="am-u-sm-9">
-                    <input type="text" id="volumename" placeholder="可以不需要应用存储绑定">
-                    <small>输入应用存储绑定名字</small>
+                    <input type="text" id="volumename" placeholder="mysql">
+                    <small>输入应用存储绑定名字(不使用持久储存信息可以不用填写)</small>
                   </div>
                 </div>
 
                 <div class="am-form-group">
                   <label for="user-name" class="am-u-sm-3 am-form-label">ClaimName</label>
                   <div class="am-u-sm-9">
-                    <input type="text" id="claimname" placeholder="可以不需要应用存储绑定">
-                    <small>输入应用存储绑定pvc名字</small>
+                    <input type="text" id="claimname" placeholder="mysqlpvc">
+                    <small>输入应用存储绑定pvc名字(不使用持久储存信息可以不用填写)</small>
                   </div>
                 </div>
 
@@ -371,6 +371,7 @@
         
         volumemountinfo.name=container_volumemountname;
         volumemountinfo.mountpath=container_volumemount;
+        //alert(volumemountinfo);
 
 
         container.containername=container_name;
@@ -407,7 +408,7 @@
 
         var a=JSON.stringify(obj,undefined,2)
 
-        alert(a);
+        //alert(a);
 
         $.ajax({
             url: "/replicationcontroller/create",

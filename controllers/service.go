@@ -82,8 +82,8 @@ func (c *ServiceController) DeleteService() {
 		return
 	} else {
 		vlog.UserName = interface{}(username).(string)
-		vlog.API = "/user/service/delete"
-		vlog.Method = "get"
+		vlog.API = "/user/service/delete" + name
+		vlog.Method = "delete"
 		log.InsertLog(vlog)
 
 	}
@@ -119,7 +119,7 @@ func (c *ServiceController) CreateService() {
 	} else {
 		vlog.UserName = interface{}(username).(string)
 		vlog.API = "/user/service/create"
-		vlog.Method = "get"
+		vlog.Method = "post"
 		log.InsertLog(vlog)
 
 	}

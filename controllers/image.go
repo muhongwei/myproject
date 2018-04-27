@@ -56,7 +56,7 @@ func (c *ImageController) DelImage() {
 	} else {
 		vlog.UserName = interface{}(username).(string)
 		vlog.API = "/user/image/delete/" + imagename
-		vlog.Method = "get"
+		vlog.Method = "delete"
 		log.InsertLog(vlog)
 
 	}

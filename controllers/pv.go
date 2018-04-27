@@ -66,7 +66,7 @@ func (c *PVController) CreatePV() {
 	} else {
 		vlog.UserName = interface{}(username).(string)
 		vlog.API = "/user/pv/create"
-		vlog.Method = "get"
+		vlog.Method = "post"
 		log.InsertLog(vlog)
 
 	}

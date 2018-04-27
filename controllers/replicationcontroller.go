@@ -52,7 +52,7 @@ func (c *RcController) GetRc() {
 		return
 	} else {
 		vlog.UserName = interface{}(username).(string)
-		vlog.API = "/user/replicationcontroller/get"
+		vlog.API = "/user/replicationcontroller/get/" + name
 		vlog.Method = "get"
 		log.InsertLog(vlog)
 
@@ -83,8 +83,8 @@ func (c *RcController) DeleteRc() {
 		return
 	} else {
 		vlog.UserName = interface{}(username).(string)
-		vlog.API = "/user/replicationcontroller/delete"
-		vlog.Method = "get"
+		vlog.API = "/user/replicationcontroller/delete/" + name
+		vlog.Method = "delete"
 		log.InsertLog(vlog)
 
 	}
@@ -114,19 +114,19 @@ func (c RcController) CreateRc() {
 		//c.Data["json"] = map[string]string{"result": err.Error()}
 	}
 
-	// var vlog log.Log
-	// sess := c.StartSession()
-	// username := sess.Get("username")
-	// if username == nil {
-	// 	c.CustomAbort(400, "login first")
-	// 	return
-	// } else {
-	// 	vlog.UserName = interface{}(username).(string)
-	// 	vlog.API = "/user/replicationcontroller/create"
-	// 	vlog.Method = "get"
-	// 	log.InsertLog(vlog)
+	var vlog log.Log
+	sess := c.StartSession()
+	username := sess.Get("username")
+	if username == nil {
+		c.CustomAbort(400, "login first")
+		return
+	} else {
+		vlog.UserName = interface{}(username).(string)
+		vlog.API = "/user/replicationcontroller/create"
+		vlog.Method = "get"
+		log.InsertLog(vlog)
 
-	// }
+	}
 
 	c.ServeJSON()
 }
