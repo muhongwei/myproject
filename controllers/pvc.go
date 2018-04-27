@@ -137,5 +137,7 @@ func (c *PVCController) UserCreatePVC() {
 
 //UserGetPVC UserGetPVC
 func (c *PVCController) UserGetPVC() {
+	name := c.GetString(":name")
+	c.Data["PVCName"] = name
 	c.TplName = "pvc.html"
 }

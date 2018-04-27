@@ -178,8 +178,8 @@
             <div class="admin-content-body">
                 <div class="am-cf am-padding am-padding-bottom-0">
                     <div class="am-fl am-cf">
-                        <strong class="am-text-primary am-text-lg">表格</strong> /
-                        <small>Table</small>
+                        <strong class="am-text-primary am-text-lg">pv</strong> /
+                        <small>pvlist</small>
                     </div>
                 </div>
 
@@ -271,7 +271,7 @@
                     htmltext +=
                         '<tr>' +
                         '<td>' +
-                        '<a href="#">' + obj.items[i].metadata.name + '</a>' +
+                        '<a href="/user/pv/get/'+obj.items[i].metadata.name+'">' + obj.items[i].metadata.name + '</a>' +
                         '</td>' +
                         '<td>' + obj.items[i].spec.capacity.storage + '</td>' +
                         '<td>' + obj.items[i].spec.accessModes[0] + '</td>' +

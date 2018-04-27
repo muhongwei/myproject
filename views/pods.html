@@ -196,6 +196,7 @@
                       <!-- <th class="table-id">ID</th> -->
                       <th class="table-title">name</th>
                       <th class="table-title">namespace</th>
+                      <th class="table-title">nodename</th>
                       <th class="table-title">status</th>
                       <th class="table-title">restarts</th>
                       <th class="table-date am-hide-sm-only">create_time</th>
@@ -294,6 +295,7 @@
             '</td>' +
             '</td>' +
             '<td>' + obj.items[i].metadata.namespace + '</td>' +
+            '<td>' + obj.items[i].spec.nodeName + '</td>' +
             '<td>' + obj.items[i].status.phase + '</td>' +
             '<td>' + obj.items[i].status.containerStatuses[0].restartCount + '</td>' +
             '<td>' + obj.items[i].metadata.creationTimestamp + '</td>' +

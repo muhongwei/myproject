@@ -22,5 +22,7 @@ func main() {
 	beego.SetStaticPath("/user/service/get/assets", "static/assets")
 	beego.SetStaticPath("/user/pv/assets", "static/assets")
 	beego.SetStaticPath("/user/pvc/assets", "static/assets")
+	beego.SetStaticPath("/user/pv/get/assets", "static/assets")
+	beego.SetStaticPath("/user/pvc/get/assets", "static/assets")
 	beego.Run()
 }

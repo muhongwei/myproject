@@ -135,5 +135,7 @@ func (c *PVController) UserCreatePV() {
 
 //UserGetPV UserGetPV
 func (c *PVController) UserGetPV() {
+	name := c.GetString(":name")
+	c.Data["PVName"] = name
 	c.TplName = "pv.html"
 }
